@@ -1,2 +1,0 @@
--i http://pypi.devops.xiaohongshu.com/simple --trusted-host pypi.devops.xiaohongshu.com
-tqdm==4.48.2

@@ -8,6 +8,7 @@
 - 介绍如何生成fake dataset， dataset的意思是什么
 - 介绍下方法
 - 项目readme要不断更新完善，加油
+- 测试
 
 ## Dataset
 Our dataset contain two types of nodes: ['user','note'] and three types of edges {'follow_note','comment_note','share_note'}.

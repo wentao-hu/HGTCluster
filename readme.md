@@ -1,6 +1,6 @@
 
 # HGTCluster
-Based on [alibaba/graph-learn](https://github.com/alibaba/graph-learn), we attempt to integrate [Heterogeneous Graph Transformer](https://arxiv.org/pdf/2003.01332.pdf) with self-supervised setting for two aims:
+This project is based on [alibaba/graph-learn](https://github.com/alibaba/graph-learn), a distributed framework designed for the development and application of large-scale graph neural networks. We attempt to integrate [Heterogeneous Graph Transformer](https://arxiv.org/pdf/2003.01332.pdf) with self-supervised setting for two aims:
 
 1. Learn better user embedding, so we can improve the performance of u2u2i recall channel.
 2. Learn better user cluster, so that we can boost the weight of notes from the users in the same cluster.
@@ -23,7 +23,7 @@ To solve the 1-st problem, we use Heterogeneous Graph Transformer to learn bette
 
 
 ## Dataset
-Our dataset contain two types of nodes: ['user','note'] and three types of edges {'follow_note','comment_note','share_note'}.
+Our fake dataset contain two types of nodes: ['user','note'] and two types of edges ['follow_note','share_note']. Our model can be easily extended to more node types and edge types in production setting.
 
 ## Distributed training
 On real production data, we run code with parameter-server architecture including parameter-server node, worker node and graphlearn node. graphlearn node is for building graph and sampling neighborhood nodes. We have 20 graphlearn nodes, so our data is partitioned into 20 parts at distributed setting.

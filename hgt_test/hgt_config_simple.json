@@ -1,0 +1,45 @@
+{
+  "userFeatures": [
+    ["userId", -1, 0, 32],
+    ["frequentCity", -1, 0, 32],
+    ["frequentCityTier", -1, 0, 32],
+    ["predict_age", -1, 0, 32],
+    ["predict_gender", -1, 0, 32],
+    ["daysActiveInl7D", -1, 0, 16],
+    ["daysActiveInl28D", -1, 0, 16],
+    ["tenure", -1, 0, 8],
+    ["logintopics", -1, -1, 32, "bucket-string", 1000],
+    ["lt_concept_profile", -1, -1, 32, "bucket-string", 10000],
+    ["st_concept_profile", -1, -1, 32, "bucket-string", 10000],
+    ["life_cycle_stage", -1, 0, 16]
+  ],
+  "authorFeatures": [
+    ["authorId", -1, 0, 32],
+    ["frequentCity", -1, 0, 32],
+    ["frequentCityTier", -1, 0, 32],
+    ["predict_age", -1, 0, 32],
+    ["predict_gender", -1, 0, 32],
+    ["daysActiveInl7D", -1, 0, 16],
+    ["daysActiveInl28D", -1, 0, 16],
+    ["tenure", -1, 0, 8],
+    ["logintopics", -1, -1, 16, "bucket-string", 1000],
+    ["life_cycle_stage", -1, 0, 8],
+    ["post_tax1", -1, -1, 32, "bucket-string", 1000],
+    ["post_tax2", -1, -1, 32, "bucket-string", 1000],
+    ["fans_top5_tax1", -1, -1, 32, "bucket-string", 1000],
+    ["fans_top5_city", -1, -1, 32, "bucket-string", 1000],
+    ["top3_taxonomy1", -1, -1, 32, "bucket-string", 1000],
+    ["author_taxonomy1_v2", -1, 0, 32, "bucket-int", 1000],
+    ["author_taxonomy2_v2", -1, 0, 32, "bucket-int", 1000]
+  ],
+  "noteFeatures": [
+    ["noteId", -1, 0, 32],
+    ["isVideo",  0, 0, 8],
+    ["authorId", -1, 0, 32],
+    ["authorAge", -1, 0, 32],
+    ["authorGender", 2, 0, 32],
+    ["predict_city", -1, 0, 16],
+    ["predict_city_group", -1, 0, 16],
+    ["tax", -1, 0, 32]
+  ]
+}

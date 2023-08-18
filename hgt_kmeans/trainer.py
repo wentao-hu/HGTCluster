@@ -149,13 +149,15 @@ class DistTrainer(object):
             outs = self.sess.run(train_ops)
         except tf.errors.OutOfRangeError:
           epoch += 1
-          print('End of an epoch. global_step = {}'.format(self.sess._tf_sess().run(self.global_step)))
-          # self.sess._tf_sess().run([iterator.initializer for iterator in iterator_list])
+          print('End of an epoch.')
+          for iterator in iterator_list:
+            self.sess._tf_sess().run(iterator.initializer)
           if epoch >= epochs:
-            print('sync barrier start.')
-            #self.sync_barrier.end(self.sess)
-            print('sync barrier finished.')
-            self.sess._tf_sess().run([iterator.initializer for iterator in iterator_list])
+            # print('sync barrier start.')
+            # self.sync_barrier.end(self.sess)
+            # print('sync barrier finished.')
+            for iterator in iterator_list:
+              self.sess._tf_sess().run(iterator.initializer)
         train_loss = outs[1]
         global_step = outs[2]
         if len(metrics) > 0:
@@ -164,7 +166,7 @@ class DistTrainer(object):
             acc = 0.0
         # Print results
         # print('==last global step is {}, local step is {}'.format(last_global_step, local_step))
-        if local_step <= 20 or local_step % 10 == 0:
+        if local_step % 10 == 0:
           print(datetime.datetime.now(),
                 'Epoch {}, Iter {}, Global_step {}, Global_step/sec {:.2f}, Time(s) {:.4f}, Loss {:.5f}, Accuracy {:.5f}'
                 .format(epoch, local_step, global_step,
@@ -183,30 +185,20 @@ class DistTrainer(object):
       if self.sess is None:
         self.init_session()
       local_step = 0
-      last_global_step = 0
-      t = time.time()
       self.sess._tf_sess().run(iterator.initializer)
       emb_dict = {}
       while True:
         try:
-          outs = self.sess._tf_sess().run([ids, emb, self.global_step])
+          t = time.time()
+          outs = self.sess._tf_sess().run([ids, emb])
           # [B,], [B,dim]
           feat = [','.join(str(x) for x in arr) for arr in outs[1]]
           res = list(zip(outs[0], feat))  # id,emb
           for (id, value) in res:
             emb_dict[id] = value
           local_step += 1
-          if local_step <= 20 or local_step % 1000 == 0:
-            global_step = outs[2]
-            print(datetime.datetime.now(),
-                  'Iter {}, Global_step {}, Global_step/sec {:.2f}, Time(s) {:.4f}'
-                  .format(local_step, global_step,
-                          (global_step - last_global_step) * 1.0 / (time.time() - t),
-                          (time.time() - t) * 1.0))
-            t = time.time()
-            last_global_step = global_step
         except tf.errors.OutOfRangeError:
-          print("Start write to file... global_step={}".format(self.sess._tf_sess().run(self.global_step)))
+          print("Start write to file...")
           print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
           with open(emb_path, 'w') as f:
             for id in emb_dict:

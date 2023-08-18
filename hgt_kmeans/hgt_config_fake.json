@@ -2,9 +2,6 @@
   "userFeatures": [
     ["age", 0, 0, 1, "int"]
   ],
-  "authorFeatures": [
-    ["popularity", 0, 0, 1, "float"]
-  ],
   "noteFeatures": [
     ["views", 0, 0, 1, "int"]
   ]

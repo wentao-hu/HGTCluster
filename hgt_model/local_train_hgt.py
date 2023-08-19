@@ -84,6 +84,7 @@ def train():
             TRAINING_DATA_EDGE_LIST)
 
     g, decoder_dict = init_graph(TRAINING_DATA_NODE_LIST, TRAINING_DATA_EDGE_LIST)
+    g.init()
 
     trainer = LocalTrainer()
 

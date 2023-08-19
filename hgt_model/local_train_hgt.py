@@ -219,11 +219,11 @@ def train():
     ### train model
     print('===start trainer.train and total epochs is', FLAGS.train_epochs)
     ## train with some epochs
-    trainer.train(iterator, loss, learning_rate=FLAGS.learning_rate, epochs=FLAGS.train_epochs,
+    optimizer = tf.train.AdamOptimizer(learning_rate=FLAGS.learning_rate)
+    trainer.train(iterator, loss, optimizer=optimizer, learning_rate=FLAGS.learning_rate, epochs=FLAGS.train_epochs,
                     metrics=[accuracy_train, update_op_train])
 
 
-    trainer.close()
     g.close()
     print("graph closed")
 
@@ -247,8 +247,8 @@ def define_custom_flags():
 
     # for model training
     flags.DEFINE_integer('train_epochs', default=1, help='Number of epochs used to train')
-    flags.DEFINE_integer('batch_size', 8, 'training minibatch size')
-    flags.DEFINE_float('learning_rate', 0.001, 'learning rate')
+    flags.DEFINE_integer('batch_size', 64, 'training minibatch size')
+    flags.DEFINE_float('learning_rate', 0.01, 'learning rate')
     flags.DEFINE_float('drop_out', 0.5, 'drop out rate')
     flags.DEFINE_integer('hidden_dim', 64, 'hidden layer dim')
     flags.DEFINE_integer('n_heads', 4, 'number of relations')

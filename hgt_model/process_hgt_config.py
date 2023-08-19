@@ -8,7 +8,7 @@ def get_feature_config(config_name):
         config = json.load(f)
 
     feature_config = {}
-    for key in ['userFeatures', 'noteFeatures']:
+    for key in ['userFeatures','authorFeatures', 'noteFeatures']:
         features = config[key]
         attr_types = []
         attr_dims = []

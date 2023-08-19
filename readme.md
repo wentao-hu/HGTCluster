@@ -34,7 +34,7 @@ python gen_fake_edge_dist.py
 
 2. train model with distributed trainer:
 ```
-python train_dist_hgt_kmeans.py
+python dist_train_hgt.py
 ```
 
 ### Local training 
@@ -47,7 +47,7 @@ python gen_fake_edge_local.py
  ```
 2. train model with local trainer: 
 ```
-python train_local_hgt_kmeans.py
+python local_train_hgt.py
 ```
 
 

@@ -110,7 +110,7 @@ class DistTrainer(object):
           hooks=hooks_,
           config=conf)
 
-  def train(self, iterator_list, loss, learning_rate, epochs=10, hooks=[], metrics=[], **kwargs):
+  def train(self, iterator, loss, learning_rate, epochs=10, hooks=[], metrics=[], **kwargs):
     with self.context():
       self.global_step = tf.train.get_or_create_global_step()
       try:
@@ -119,8 +119,7 @@ class DistTrainer(object):
         optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
       train_op = optimizer.minimize(loss, global_step=self.global_step)
       train_ops = [train_op, loss, self.global_step] + metrics
-      for iterator in iterator_list:
-        tf.add_to_collection(tf.GraphKeys.TABLE_INITIALIZERS, iterator.initializer)
+      tf.add_to_collection(tf.GraphKeys.TABLE_INITIALIZERS, iterator.initializer)
       # self.init_session(hooks=hooks)
       self.init_session()
       print('Start training...')
@@ -150,14 +149,12 @@ class DistTrainer(object):
         except tf.errors.OutOfRangeError:
           epoch += 1
           print('End of an epoch.')
-          for iterator in iterator_list:
-            self.sess._tf_sess().run(iterator.initializer)
+          self.sess._tf_sess().run(iterator.initializer)
           if epoch >= epochs:
             # print('sync barrier start.')
             # self.sync_barrier.end(self.sess)
             # print('sync barrier finished.')
-            for iterator in iterator_list:
-              self.sess._tf_sess().run(iterator.initializer)
+            self.sess._tf_sess().run(iterator.initializer)
         train_loss = outs[1]
         global_step = outs[2]
         if len(metrics) > 0:

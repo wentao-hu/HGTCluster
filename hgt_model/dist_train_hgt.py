@@ -56,11 +56,9 @@ def init_graph(TRAINING_DATA_NODE_LIST, TRAINING_DATA_EDGE_LIST):
               decoder=note_decoder) \
         .edge(TRAINING_DATA_EDGE_LIST[0], edge_type=('user', 'note', 'pos_follow_note'),
               decoder=gl.Decoder(weighted=True, labeled=True), directed=False) \
-        .edge(TRAINING_DATA_EDGE_LIST[1], edge_type=('user', 'note', 'pos_comment_note'),
+        .edge(TRAINING_DATA_EDGE_LIST[1], edge_type=('user', 'note', 'pos_share_note'),
               decoder=gl.Decoder(weighted=True, labeled=True), directed=False) \
-        .edge(TRAINING_DATA_EDGE_LIST[2], edge_type=('user', 'note', 'pos_share_note'),
-              decoder=gl.Decoder(weighted=True, labeled=True), directed=False) \
-        .edge(TRAINING_DATA_EDGE_LIST[1], edge_type=('user', 'note', 'label_edge'),
+        .edge(TRAINING_DATA_EDGE_LIST[0], edge_type=('user', 'note', 'label_edge'),
               decoder=gl.Decoder(weighted=True, labeled=True), directed=False)
     return g, decoder_dict
 
@@ -472,7 +470,6 @@ if __name__ == "__main__":
 
     pos_relation_dict = OrderedDict()
     pos_relation_dict['pos_follow_note'] = ['user', 'note']
-    pos_relation_dict['pos_comment_note'] = ['user', 'note']
     pos_relation_dict['pos_share_note'] = ['user', 'note']
 
     label_relation_dict = OrderedDict()  # we only have one element in label_relation_dict to get one iterator

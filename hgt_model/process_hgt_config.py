@@ -1,6 +1,6 @@
 import json
 import sys
-
+import os
 
 def get_feature_config(config_name):
     cur_path = sys.path[0]
@@ -8,7 +8,7 @@ def get_feature_config(config_name):
         config = json.load(f)
 
     feature_config = {}
-    for key in ['userFeatures', 'authorFeatures', 'noteFeatures']:
+    for key in ['userFeatures', 'noteFeatures']:
         features = config[key]
         attr_types = []
         attr_dims = []
@@ -56,4 +56,13 @@ def get_feature_config(config_name):
 
 
 if __name__ == "__main__":
-    feature_config = get_feature_config("hgt_config_with_bucket.json")
+    TRAINING_DATA_NODE_LIST= []
+    TRAINING_DATA_EDGE_LIST= []
+    current_path = sys.path[0]
+    local_fakedata_path = os.path.abspath(os.path.join(current_path,'..'))+'/data/local/'
+    for node in ['fakeuser','fakenote']:
+        TRAINING_DATA_NODE_LIST.append(local_fakedata_path+'{}/{}.csv'.format(node,node))
+    for edge in ['fake_follow_note','fake_share_note']:
+        TRAINING_DATA_EDGE_LIST.append(local_fakedata_path+'{}/{}.csv'.format(edge,edge))
+    print(TRAINING_DATA_NODE_LIST,TRAINING_DATA_EDGE_LIST)
+    feature_config = get_feature_config("hgt_config_fake.json")

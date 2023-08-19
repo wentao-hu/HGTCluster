@@ -2,8 +2,8 @@
 # HGTCluster
 This project is based on [alibaba/graph-learn](https://github.com/alibaba/graph-learn), a distributed framework designed for the development and application of large-scale graph neural networks. We attempt to adapt [Heterogeneous Graph Transformer](https://arxiv.org/pdf/2003.01332.pdf) into self-supervised setting for two aims:
 
-1. Learn better user embedding, so we can improve the performance of u2u2i recall channel.
-2. Learn better user cluster, so that we can boost the weight of notes from the users in the same cluster.
+1. Learn better user embedding, then we can improve the performance of u2u2i recall channel.
+2. Learn better user cluster, then we can boost the weight of notes from the users in the same cluster.
 
 ## Method 
 #### baseline: TwHIN+KMeans

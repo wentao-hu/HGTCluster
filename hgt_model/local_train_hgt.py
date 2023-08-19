@@ -248,13 +248,13 @@ def define_custom_flags():
 
     # for model training
     flags.DEFINE_integer('train_epochs', default=1, help='Number of epochs used to train')
-    flags.DEFINE_integer('batch_size', 32, 'training minibatch size')
+    flags.DEFINE_integer('batch_size', 8, 'training minibatch size')
     flags.DEFINE_float('learning_rate', 0.001, 'learning rate')
     flags.DEFINE_float('drop_out', 0.5, 'drop out rate')
     flags.DEFINE_integer('hidden_dim', 64, 'hidden layer dim')
-    flags.DEFINE_integer('n_heads', 8, 'number of relations')
+    flags.DEFINE_integer('n_heads', 4, 'number of relations')
     flags.DEFINE_boolean('use_norm', True, 'use norm for hgt aggregation')
-    flags.DEFINE_string('nbrs_num', '[4,2]', 'string of list, neighbor num of each hop')
+    flags.DEFINE_string('nbrs_num', '[2,2]', 'string of list, neighbor num of each hop')
     flags.DEFINE_string('sampler', 'random', 'neighbor sampler strategy. random, in_degree, topk.')
     flags.DEFINE_integer('neg_num', 2, 'number of negative samples for each src/dst node in pos relation')
 

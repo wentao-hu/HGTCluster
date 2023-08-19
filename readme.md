@@ -7,7 +7,7 @@ This project is based on [alibaba/graph-learn](https://github.com/alibaba/graph-
 
 ## Method 
 #### baseline: TwHIN+KMeans
-baseline model first uses [TwHIN](https://arxiv.org/pdf/2202.05387.pdf) which is based on [TranE](https://proceedings.neurips.cc/paper_files/paper/2013/file/1cecc7a77928ca8133fa24680a88d2f9-Paper.pdf) to embed nodes and edges. After getting user node embedding, it uses KMeans to cluster user nodes. This method suffer from two problems:
+baseline model first uses [TwHIN](https://arxiv.org/pdf/2202.05387.pdf), which is based on [TranE](https://proceedings.neurips.cc/paper_files/paper/2013/file/1cecc7a77928ca8133fa24680a88d2f9-Paper.pdf) to embed nodes and edges. After getting user node embedding, it uses KMeans to cluster user nodes. This method suffer from two problems:
 1. It doesn't consider information from further neighbors such as 2-hop neighbors.
 2. The learning objective of TwHIN is to classify positive triplets and negative triplets. It is not consistent with downstream KMeans clustering.
 

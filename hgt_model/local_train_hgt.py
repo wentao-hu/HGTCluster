@@ -219,8 +219,6 @@ def train():
     ### train model
     print('===start trainer.train and total epochs is', FLAGS.train_epochs)
     ## train with some epochs
-    optimizer = tf.train.AdamOptimizer(learning_rate=FLAGS.learning_rate)
-    trainer.train(iterator, loss, optimizer, epochs=FLAGS.epochs, metrics =[accuracy_train, update_op_train]) 
     trainer.train(iterator, loss, learning_rate=FLAGS.learning_rate, epochs=FLAGS.train_epochs,
                     metrics=[accuracy_train, update_op_train])
 

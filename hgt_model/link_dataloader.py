@@ -24,7 +24,10 @@ class EgoHGTDataLoader:
 
         # self defined parameters
         self._label_relation_dict = label_relation_dict
-        self._label_edge = label_relation_dict.keys()[0]
+        if type(label_relation_dict.keys()) != list:
+            self._label_edge = list(label_relation_dict.keys())[0]
+        else:
+            self._label_edge = label_relation_dict.keys()[0]
         # self._neg_relation = neg_relation
         self._pos_relation_dict = pos_relation_dict
         self._user_feature_handler = user_feature_handler

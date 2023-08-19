@@ -10,7 +10,6 @@ import graphlearn.python.nn.tf as tfg
 import sys
 import os
 import shutil
-import commands
 from collections import OrderedDict
 
 from ego_hgt_linkpred import EgoHGT

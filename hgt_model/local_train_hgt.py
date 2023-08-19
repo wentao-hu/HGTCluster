@@ -299,10 +299,6 @@ if __name__ == "__main__":
     print('=save_model_dir: ',FLAGS.save_model_dir)
     print('=save_emb_num: ',FLAGS.save_emb_num)
 
-    assert FLAGS.save_emb_dir is not None
-    assert FLAGS.save_model_dir is not None
-    assert FLAGS.save_emb_num is not None
-
     tfg.conf.emb_min_slice_size = FLAGS.emb_min_slice_size
     tfg.conf.emb_live_steps = FLAGS.emb_live_steps
 

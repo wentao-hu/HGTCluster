@@ -18,12 +18,13 @@ import ego_data_loader as ego_data
 class EgoHGTDataLoader:
     def __init__(self, graph, mask=gl.Mask.TRAIN, sampler='random',
                  batch_size=128, window=10,  # parameters for base EgoDataLoader
-                 pos_relation=None, neg_num=None, pos_relation_dict=None,
+                 label_relation_dict=None, neg_num=None, pos_relation_dict=None,
                  user_feature_handler=None, author_feature_handler=None, note_feature_handler=None,
                  nbrs_num=None):
 
         # self defined parameters
-        self._pos_relation = pos_relation
+        self._label_relation_dict = label_relation_dict
+        self._label_edge = label_relation_dict.keys()[0]
         # self._neg_relation = neg_relation
         self._pos_relation_dict = pos_relation_dict
         self._user_feature_handler = user_feature_handler
@@ -40,16 +41,17 @@ class EgoHGTDataLoader:
         # we have two GSL entrance here, g.E(pos_relation) and g.E(neg_relation)
         # we must return all sampled note in 1 query, 1 query for 1 dataset, and trainer will use the unique dataset and its query
         self._q, self._relation_path_dict, self._node_type_path_dict, self._relation_count_dict, self._alias_dict = self._query(
-            self._graph, self._pos_relation)
+            self._graph, self._label_edge)
 
-        print('= for gsl neg link pred:relation_path_dict', self._relation_path_dict)
-        print('= for gsl neg link pred:node_type_path_dict', self._node_type_path_dict)
-        print('= for gsl neg link pred:relation_count_dict', self._relation_count_dict)
-        print('= for gsl neg link pred:alias_dict', self._alias_dict)
+        print('= for single iter link pred:relation_path_dict', self._relation_path_dict)
+        print('= for single iter link pred:node_type_path_dict', self._node_type_path_dict)
+        print('= for single iter link pred:relation_count_dict', self._relation_count_dict)
+        print('= for single iter link pred:alias_dict', self._alias_dict)
 
         self._dataset = tfg.Dataset(self._q, window=window)
         self._iterator = self._dataset.iterator
         self._data_dict = self._dataset.get_data_dict()
+
 
     def x_list(self, query, data_dict, alias_dict, node_type_path_dict):
         """ Transforms and organizes the input data to a list of list,
@@ -100,8 +102,8 @@ class EgoHGTDataLoader:
         q = graph.E(relation).batch(self._batch_size).shuffle(traverse=True).alias(
             relation)  # GSL entrance, relation is pos_relation or neg_relation
 
-        src_node_type = self._pos_relation_dict[relation][0]
-        dst_node_type = self._pos_relation_dict[relation][1]
+        src_node_type = self._label_relation_dict[relation][0]
+        dst_node_type = self._label_relation_dict[relation][1]
         src = q.outV().alias('src_node_' + src_node_type)
         dst = q.inV().alias('dst_node_' + dst_node_type)
 

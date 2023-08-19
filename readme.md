@@ -15,7 +15,7 @@ baseline model first uses [TwHIN](https://arxiv.org/pdf/2202.05387.pdf), which i
 To solve the 1-st problem, we use Heterogeneous Graph Transformer to learn better user embedding with 2-hop neighbors at first stage. The second stage we still use KMeans for clustering.
 
 
-### Improved model 2: HGT+SOM
+#### Improved model 2: HGT+SOM
 
 
 ### Dataset
@@ -67,8 +67,3 @@ python: 2.7
 tensorflow: 1.12.1
 graphlearn: 1.0.1
 ```
-
-### TODO
-- 画一个HGT+KMeans的示意图
-- 画一个HGT+SOM的示意图
-- 项目readme要不断更新完善

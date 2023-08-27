@@ -12,12 +12,13 @@ Our generated fake dataset contain two types of nodes: ['user','note'] and two t
 For demonstration, you can locally run our demo code with the following steps:
 1. generate fake data for local setting:
 ```
-cd gen_fake_data
+cd gen_fake_data/
 python gen_fake_node_local.py
 python gen_fake_edge_local.py
  ```
 2. train model with local trainer: 
 ```
+cd hgt_model/
 python local_train_hgt.py
 ```
 3. local training results on local fake data

@@ -1,6 +1,6 @@
 
 # HGTCluster
-In this demo project, we show how to locally train original [Heterogeneous Graph Transformer](https://arxiv.org/pdf/2003.01332.pdf)(HGT) under self-supervised setting. We do not show distributed training code and our improvements based on HGT for interest of company. 
+In this demo project, we show how to locally train original [Heterogeneous Graph Transformer](https://arxiv.org/pdf/2003.01332.pdf)(HGT) under self-supervised setting. We do not show distributed training code in production settting and our improvements based on HGT for interest of company. 
 
 We use [alibaba/graph-learn](https://github.com/alibaba/graph-learn) and distributed tensorflow to train graph neural networks on large-scale graphs with billion scale nodes and edges in production settting.
 

@@ -32,7 +32,6 @@ python local_train_hgt.py
 ......
 ```
 
-
 ### Requirements
 ```
 python: 2.7
